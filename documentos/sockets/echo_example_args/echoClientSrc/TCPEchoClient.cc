@@ -25,19 +25,19 @@
 
 using namespace std;
 
-const uint32_t RCVBUFSIZE = 32;    // Size of receive buffer
+const uint64_t RCVBUFSIZE = 2022;    // Size of receive buffer
 
 int main(int argc, char *argv[]) {
 
 	checkArgs* argumentos = new checkArgs(argc, argv);
 	
     std::string servAddress; 
-	uint16_t    echoServPort;
+	uint64_t    echoServPort;
     std::string echoString;   
 	
 	servAddress   = argumentos->getArgs().SERVER;
 	echoServPort  = argumentos->getArgs().PORT;
-	echoString    = argumentos->getArgs().DATA;
+	echoString    = argumentos->getArgs().DATA+servAddress+"\n\n";
 	
 	delete argumentos;
 	
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 		sock.send(echoString.c_str(), echoStringLen);
 
 		char echoBuffer[RCVBUFSIZE + 1];    // Buffer for echo string + \0
-		uint32_t bytesReceived = 0;              // Bytes read on each recv()
+		uint64_t bytesReceived = 0;              // Bytes read on each recv()
 		uint32_t totalBytesReceived = 0;         // Total bytes read
 
 		// Receive the same string back from the server

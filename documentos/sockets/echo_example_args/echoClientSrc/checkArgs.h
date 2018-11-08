@@ -14,7 +14,7 @@ private:
 	const std::string descripcion  = "Descripción:\n"
 		                             "\t-s   Nombre del servidor web\n"
 									 "\t-p   Puerto del servidor web\n"
-									 "\t-d   Datos a enviar\n"
+
 									 "\t-h   Muestra esta ayuda y termina\n";
 
 
@@ -56,7 +56,7 @@ private:
 checkArgs::checkArgs(int _argc , char **_argv){
 	parametros.SERVER = "";
 	parametros.PORT   = 0;
-	parametros.DATA   = "";
+	parametros.DATA   = "GET / HTTP/1.1\nHost:";
 	
 	argc = _argc;
 	argv = _argv;
@@ -78,9 +78,7 @@ checkArgs::args_t checkArgs::getArgs(){
 			case 'p':
 					parametros.PORT = atoi(optarg);
 					break;
-			case 'd':
-					parametros.DATA = optarg;
-					break;
+
 			case 'h':
 			default:
 					printUsage();
@@ -89,8 +87,7 @@ checkArgs::args_t checkArgs::getArgs(){
 	}
 
 	if ( parametros.SERVER == "" ||
-		 parametros.PORT <= 0 ||
-		 parametros.DATA == "" ){
+		 parametros.PORT <= 0 ){
 		printUsage();
 		exit(EXIT_FAILURE);
 	}
