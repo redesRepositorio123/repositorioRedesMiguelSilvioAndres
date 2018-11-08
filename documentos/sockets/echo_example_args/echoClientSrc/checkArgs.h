@@ -16,12 +16,19 @@ private:
 									 "\t-p   Puerto del servidor web\n"
 									 "\t-d   Datos a enviar\n"
 									 "\t-h   Muestra esta ayuda y termina\n";
+
+
+
+
 	
 	typedef struct args_t{
 		std::string SERVER;
 		uint16_t    PORT;
 		std::string DATA;
 	} args_t;
+
+
+
 	
 	// 2) Modificar constructor
 	// 3) Modificar ciclo "getopt" en método checkArgs::getArgs()
@@ -32,6 +39,7 @@ private:
 	
 	int argc;
 	char **argv;
+	
 
 	
 public:

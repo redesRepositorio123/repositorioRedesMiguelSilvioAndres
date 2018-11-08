@@ -21,6 +21,9 @@
 #include "checkArgs.h"
 #include <iostream>    // For cerr and cout
 #include <cstdlib>     // For atoi()
+#include <fstream>
+
+using namespace std;
 
 const uint32_t RCVBUFSIZE = 32;    // Size of receive buffer
 
@@ -61,6 +64,16 @@ int main(int argc, char *argv[]) {
 			}
 			totalBytesReceived += bytesReceived;     // Keep tally of total bytes
 			echoBuffer[bytesReceived] = '\0';        // Terminate the string!
+
+			ofstream archivo;
+			archivo.open("prueba.txt",ios::out);
+			if(archivo.fail()){
+			cout<<"no se pudo abrir el archivo";
+			exit(1);
+			}	
+			archivo<< echoBuffer;
+			archivo.close();
+
 			std::cout << echoBuffer;                      // Print the echo buffer
 		}
 		std::cout << std::endl;
